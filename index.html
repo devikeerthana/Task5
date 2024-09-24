@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Personal Information</title>
+  <style>
+
+    body {
+      background:url(img.jpg.jpg);
+      background-color: #f2f6f0; 
+      font-family: Arial, sans-serif;
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      width: 80%;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #d0e1d4; 
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+      color: #4a773c;
+      text-align: center;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+    }
+    td {
+      padding: 10px;
+      vertical-align: top;
+    }
+    label {
+      font-weight: bold;
+      color: #4a773c; 
+    }
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    input[type="date"],
+    textarea {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #b0c4a2; 
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+    input[type="radio"] {
+      margin-right: 5px;
+    }
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+    li {
+      padding: 5px 0;
+    }
+    input[type="submit"],
+    input[type="reset"] {
+      background-color: #4a773c; 
+      color: #ffffff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    input[type="submit"]:hover,
+    input[type="reset"]:hover {
+      background-color: #3a5a2e; 
+    }
+    .center {
+      text-align: center;
+    }
+    p{
+      text-align: center;
+    }
+  </style>
+  <script>
+    function validateForm(event) {
+      event.preventDefault(); 
+
+      
+      const firstName = document.getElementById("firstName").value.trim();
+      const lastName = document.getElementById("lastName").value.trim();
+      const nickName = document.getElementById("nickName").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value.trim();
+      const dob = document.getElementById("dob").value;
+      const gender = document.querySelector('input[name="gender"]:checked');
+      const mobile = document.getElementById("mobile").value.trim();
+      const address = document.getElementById("address").value.trim();
+      
+      
+      let valid = true;
+      let errorMessage = "";
+
+      
+      if (firstName === "") {
+        errorMessage += "First Name is required.\n";
+        valid = false;
+      } else if (!/^[a-zA-Z]+$/.test(firstName)) {
+        errorMessage += "First Name should contain only letters.\n";
+        valid = false;
+      }
+
+     
+      if (lastName === "") {
+        errorMessage += "Last Name is required.\n";
+        valid = false;
+      } else if (!/^[a-zA-Z]+$/.test(lastName)) {
+        errorMessage += "Last Name should contain only letters.\n";
+        valid = false;
+      }
+ 
+      if (nickName === "") {
+        errorMessage += "Nick Name is required.\n";
+        valid = false;
+      } else if (!/^[a-zA-Z]+$/.test(nickName)) {
+        errorMessage += "Nick Name should contain only letters.\n";
+        valid = false;
+      }
+
+      const emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+      if (email === "" || !email.match(emailPattern)) {
+        errorMessage += "Please enter a valid email address.\n";
+        valid = false;
+      }
+      if (password.length < 8) {
+        errorMessage += "Password must be at least 8 characters long.\n";
+        valid = false;
+      }
+      const currentDate = new Date();
+      const selectedDate = new Date(dob);
+      if (!dob || selectedDate >= currentDate) {
+        errorMessage += "Please select a valid Date of Birth.\n";
+        valid = false;
+      }
+      if (!gender) {
+        errorMessage += "Please select your gender.\n";
+        valid = false;
+      }
+      const mobilePattern = /^\d{10}$/;
+      if (!mobile.match(mobilePattern)) {
+        errorMessage += "Please enter a valid 10-digit mobile number.\n";
+        valid = false;
+      }
+      if (address === "") {
+        errorMessage += "Address is required.\n";
+        valid = false;
+      }
+      if (!valid) {
+        alert(errorMessage);
+      } else {
+        alert("Form submitted successfully!");
+        document.querySelector('form').submit(); 
+      }
+    }
+</script>
+</head>
+<body>
+  <div class="container">
+    <h1>Personal Information</h1>
+    <form onsubmit="validateForm(event)">
+      <table>
+        <tr>
+          <td><label for="firstName">First Name:</label></td>
+          <td><input type="text" id="firstName" name="firstName"></td>
+        </tr>
+        <tr>
+          <td><label for="lastName">Last Name:</label></td>
+          <td><input type="text" id="lastName" name="lastName"></td>
+        </tr>
+        <tr>
+          <td><label for="nickName">Nick Name:</label></td>
+          <td><input type="text" id="nickName" name="nickName"></td>
+        </tr>
+        <tr>
+          <td><label for="email">Email:</label></td>
+          <td><input type="email" id="email" name="email"></td>
+        </tr>
+        <tr>
+          <td><label for="password">Password:</label></td>
+          <td><input type="password" id="password" name="password"></td>
+        </tr>
+        <tr>
+          <td><label for="dob">Date of Birth:</label></td>
+          <td><input type="date" id="dob" name="dob"></td>
+        </tr>
+        <tr>
+          <td><label>Gender:</label></td>
+          <td>
+            <input type="radio" id="male" name="gender" value="male">
+            <label for="male">Male</label>
+            <input type="radio" id="female" name="gender" value="female">
+            <label for="female">Female</label>
+          </td>
+        </tr>
+        <tr>
+          <td><label for="mobile">Mobile No:</label></td>
+          <td><input type="text" id="mobile" name="mobile"></td>
+        </tr>
+        <tr>
+          <td><label for="address">Address:</label></td>
+          <td><textarea id="address" name="address" cols="30" rows="3"></textarea></td>
+        </tr>
+        <tr>
+          <td colspan="2" class="center">
+            <input type="submit" value="Submit">
+            <input type="reset" value="Reset">
+          </td>
+        </tr>
+        <div class="register-link">
+          <p>Already have an account? <a href="index.html">Login form</a></p>
+        </div>
+      </table>
+    </form>
+  </div>
+</body>
+</html>
